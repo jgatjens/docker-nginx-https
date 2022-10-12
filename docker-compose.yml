@@ -1,0 +1,28 @@
+services:
+  api:
+    container_name: api
+    image: node
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api/:/api/
+    command: bash -c "cd /api && npm install && npm start"
+  nginx:
+    container_name: nginx
+    restart: unless-stopped
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/cert:/etc/nginx/cert
+  # ONLY PROD
+  # certbot:
+  #   image: certbot/certbot
+  #   container_name: certbot
+  #   volumes:
+  #     - ./certbot/conf:/etc/letsencrypt
+  #     - ./certbot/www:/var/www/certbot
+  #   Production
+  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email jgatjens@gmail.com -d prod.domain --agree-tos
