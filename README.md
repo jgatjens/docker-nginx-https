@@ -1,7 +1,6 @@
-## DOCKET HTTPS
+## DOCKER + NGINX + HTTPS
 
-## MAC setup
-
+MAC setup
 Create the certificates.
 
 ```bash
